@@ -1,0 +1,61 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo/Brand -->
+    <div class="navbar-brand">
+      <a routerLink="/" class="brand-logo">Portfolio</a>
+    </div>
+
+    <!-- Desktop Navigation Menu -->
+    <ul class="navbar-menu">
+      <li class="navbar-item">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-link">Home</a>
+      </li>
+      <li class="navbar-item">
+        <a routerLink="/about" routerLinkActive="active" class="navbar-link">About</a>
+      </li>
+      <li class="navbar-item">
+        <a routerLink="/experience" routerLinkActive="active" class="navbar-link">Experience</a>
+      </li>
+      <li class="navbar-item">
+        <a routerLink="/projects" routerLinkActive="active" class="navbar-link">Projects</a>
+      </li>
+      <li class="navbar-item">
+        <a routerLink="/contact" routerLinkActive="active" class="navbar-link">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Right Side Controls -->
+    <div class="navbar-controls">
+      <!-- Theme Toggle Button -->
+      <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="'Switch to ' + (themeService.currentTheme() === 'light' ? 'dark' : 'light') + ' mode'">
+        <span class="theme-icon">{{ themeService.getThemeIcon() }}</span>
+      </button>
+
+      <!-- Hamburger Menu Button -->
+      <div class="navbar-toggle" (click)="toggleMenu()">
+        <span class="hamburger-line" [class.active]="isMenuOpen"></span>
+        <span class="hamburger-line" [class.active]="isMenuOpen"></span>
+        <span class="hamburger-line" [class.active]="isMenuOpen"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <ul class="navbar-menu-mobile" [class.active]="isMenuOpen">
+    <li class="navbar-item-mobile">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-link-mobile" (click)="closeMenu()">Home</a>
+    </li>
+    <li class="navbar-item-mobile">
+      <a routerLink="/about" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">About</a>
+    </li>
+    <li class="navbar-item-mobile">
+      <a routerLink="/experience" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">Experience</a>
+    </li>
+    <li class="navbar-item-mobile">
+      <a routerLink="/projects" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">Projects</a>
+    </li>
+    <li class="navbar-item-mobile">
+      <a routerLink="/contact" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">Contact</a>
+    </li>
+  </ul>
+</nav> 

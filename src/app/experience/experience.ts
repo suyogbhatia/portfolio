@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Navbar } from '../navbar/navbar';
 
 @Component({
   selector: 'app-experience',
-  imports: [],
+  imports: [Navbar],
   templateUrl: './experience.html',
   styleUrl: './experience.scss'
 })

@@ -1,14 +1,4 @@
-// Variables
-$primary-color: #2563eb;
-$secondary-color: #1e40af;
-$white: #ffffff;
-$transition: all 0.3s ease;
-
-// Dark mode variables
-$dark-bg: #1f2937;
-$dark-surface: #374151;
-
-// Main Content
+// Main Content using custom design tokens
 .main-content {
   margin-top: 70px;
   min-height: calc(100vh - 70px);
@@ -21,14 +11,14 @@ $dark-surface: #374151;
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 70px);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: $white;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  color: #ffffff;
   text-align: center;
   padding: 2rem 1rem;
   
   // Dark mode hero background
   .dark & {
-    background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-dark) 100%);
   }
 }
 
@@ -50,21 +40,21 @@ $dark-surface: #374151;
   }
   
   .cta-button {
-    background: $primary-color;
-    color: $white;
+    background: var(--primary-color);
+    color: #ffffff;
     border: none;
     padding: 1rem 2rem;
     font-size: 1.1rem;
     font-weight: 600;
     border-radius: 0.5rem;
     cursor: pointer;
-    transition: $transition;
+    transition: var(--transition);
     animation: fadeInUp 1s ease 0.4s both;
     
     &:hover {
-      background: $secondary-color;
+      background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 10px 25px rgba(25, 118, 210, 0.3);
     }
   }
 }

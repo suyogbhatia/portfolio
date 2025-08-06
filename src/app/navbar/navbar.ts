@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ThemeService } from '../services/theme.service';
 
@@ -6,12 +6,18 @@ import { ThemeService } from '../services/theme.service';
   selector: 'app-navbar',
   imports: [RouterModule],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.scss'
+  styleUrl: './navbar.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Navbar {
-  isMenuOpen: boolean = false;
+  private themeService = inject(ThemeService);
+  
+  isMenuOpen = false;
 
-  constructor(public themeService: ThemeService) {}
+  // Expose theme service computed values directly
+  public readonly currentTheme = this.themeService.currentTheme;
+  public readonly themeIcon = this.themeService.themeIcon;
+  public readonly ariaLabel = this.themeService.ariaLabel;
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;

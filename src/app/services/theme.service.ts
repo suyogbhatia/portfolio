@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
 
 export type Theme = 'light' | 'dark';
 
@@ -6,50 +6,43 @@ export type Theme = 'light' | 'dark';
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly THEME_KEY = 'portfolio-theme';
+  // Signal to track current theme with system preference as default
+  private readonly _currentTheme = signal<Theme>(this.getSystemTheme());
   
-  // Signal to track current theme
-  public currentTheme = signal<Theme>('light');
+  // Public readonly signal for theme state
+  public readonly currentTheme = this._currentTheme.asReadonly();
+  
+  // Computed values for reactive UI updates
+  public readonly themeIcon = computed(() => 
+    this._currentTheme() === 'light' ? '☀️':'🌙' 
+  );
+  
+  public readonly ariaLabel = computed(() => 
+    `Switch to ${this._currentTheme() === 'light' ? 'dark' : 'light'} mode`
+  );
+
+
 
   constructor() {
-    this.initializeTheme();
+    this.applyThemeToDocument(this._currentTheme());
   }
 
-  private initializeTheme(): void {
-    // Check localStorage first
-    const savedTheme = localStorage.getItem(this.THEME_KEY) as Theme;
-    
-    if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
-      this.setTheme(savedTheme);
-    } else {
-      // Use system preference
-      this.setSystemTheme();
-    }
-  }
-
-  private setSystemTheme(): void {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    this.setTheme(prefersDark ? 'dark' : 'light');
+  private getSystemTheme(): Theme {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
   public toggleTheme(): void {
-    const newTheme = this.currentTheme() === 'light' ? 'dark' : 'light';
-    this.setTheme(newTheme);
+    const newTheme = this._currentTheme() === 'light' ? 'dark' : 'light';
+    this._currentTheme.set(newTheme);
+    this.applyThemeToDocument(newTheme);
   }
 
-  private setTheme(theme: Theme): void {
-    this.currentTheme.set(theme);
-    localStorage.setItem(this.THEME_KEY, theme);
-    
-    // Apply theme to document
+  private applyThemeToDocument(theme: Theme): void {
+    // Apply theme class to document
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }
-
-  public getThemeIcon(): string {
-    return this.currentTheme() === 'light' ? '🌙' : '☀️';
   }
 } 

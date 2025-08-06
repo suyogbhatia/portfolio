@@ -1,33 +1,17 @@
-// Variables
-$primary-color: #2563eb;
-$secondary-color: #1e40af;
-$text-color: #1f2937;
-$light-text: #6b7280;
-$white: #ffffff;
-$shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-$transition: all 0.3s ease;
-
-// Dark mode variables
-$dark-bg: #1f2937;
-$dark-surface: #374151;
-$dark-text: #f9fafb;
-$dark-border: #4b5563;
-
-// Navbar Styles
+// Navbar Styles using custom design tokens
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  box-shadow: $shadow;
+  box-shadow: var(--shadow);
   z-index: 1000;
-  transition: $transition;
+  transition: var(--transition);
 
-  // Dark mode styles - black background with white text
+  // Dark mode styles - Material dark background
   .dark & {
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(18, 18, 18, 0.95);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
   }
 }
@@ -47,12 +31,12 @@ $dark-border: #4b5563;
   .brand-logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: $primary-color;
+    color: var(--primary-color);
     text-decoration: none;
-    transition: $transition;
+    transition: var(--transition);
     
     &:hover {
-      color: $secondary-color;
+      color: var(--primary-dark);
     }
   }
 }
@@ -67,22 +51,22 @@ $dark-border: #4b5563;
   
   .navbar-item {
     .navbar-link {
-      color: $text-color;
+      color: var(--text-primary);
       text-decoration: none;
       font-weight: 500;
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
-      transition: $transition;
+      transition: var(--transition);
       position: relative;
       
       &:hover {
-        color: $primary-color;
-        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary-color);
+        background: rgba(25, 118, 210, 0.1);
       }
       
       &.active {
-        color: $primary-color;
-        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary-color);
+        background: rgba(25, 118, 210, 0.1);
         
         &::after {
           width: 80%;
@@ -96,26 +80,13 @@ $dark-border: #4b5563;
         left: 50%;
         width: 0;
         height: 2px;
-        background: $primary-color;
-        transition: $transition;
+        background: var(--primary-color);
+        transition: var(--transition);
         transform: translateX(-50%);
       }
       
       &:hover::after {
         width: 80%;
-      }
-
-      // Dark mode styles - white text
-      .dark & {
-        color: $white;
-        
-        &:hover {
-          background: rgba(37, 99, 235, 0.2);
-        }
-        
-        &.active {
-          background: rgba(37, 99, 235, 0.2);
-        }
       }
     }
   }
@@ -135,21 +106,21 @@ $dark-border: #4b5563;
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  transition: $transition;
+  transition: var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
   
   &:hover {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(25, 118, 210, 0.1);
   }
 
   .theme-icon {
     font-size: 1.25rem;
-    transition: $transition;
+    transition: var(--transition);
   }
 
-  // Dark mode styles - white background on hover
+  // Dark mode styles
   .dark & {
     &:hover {
       background: rgba(255, 255, 255, 0.1);
@@ -164,19 +135,19 @@ $dark-border: #4b5563;
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  transition: $transition;
+  transition: var(--transition);
   
   &:hover {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(25, 118, 210, 0.1);
   }
   
   .hamburger-line {
     width: 25px;
     height: 3px;
-    background: $text-color;
+    background: var(--text-primary);
     margin: 3px 0;
     border-radius: 2px;
-    transition: $transition;
+    transition: var(--transition);
     
     &.active {
       &:nth-child(1) {
@@ -192,13 +163,13 @@ $dark-border: #4b5563;
       }
     }
 
-    // Dark mode styles - white lines
+    // Dark mode styles
     .dark & {
-      background: $white;
+      background: var(--text-primary);
     }
   }
 
-  // Dark mode styles - white background on hover
+  // Dark mode styles
   .dark & {
     &:hover {
       background: rgba(255, 255, 255, 0.1);
@@ -208,29 +179,21 @@ $dark-border: #4b5563;
 
 // Mobile Navigation Menu
 .navbar-menu-mobile {
-  display: none;
   list-style: none;
   margin: 0;
   padding: 0;
-  background: $white;
-  box-shadow: $shadow;
+  background: var(--bg-primary);
+  box-shadow: var(--shadow);
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  transform: translateY(-100%);
-  opacity: 0;
-  visibility: hidden;
-  transition: $transition;
-  
-  &.active {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
+  opacity: 1;
+  visibility: visible;
+  transition: var(--transition);
   
   .navbar-item-mobile {
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--border-color);
     
     &:last-child {
       border-bottom: none;
@@ -238,47 +201,23 @@ $dark-border: #4b5563;
     
     .navbar-link-mobile {
       display: block;
-      color: $text-color;
+      color: var(--text-primary);
       text-decoration: none;
       font-weight: 500;
       padding: 1rem 1.5rem;
-      transition: $transition;
+      transition: var(--transition);
       
       &:hover {
-        color: $primary-color;
-        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary-color);
+        background: rgba(25, 118, 210, 0.1);
       }
       
       &.active {
-        color: $primary-color;
-        background: rgba(37, 99, 235, 0.1);
-        border-left: 3px solid $primary-color;
+        color: var(--primary-color);
+        background: rgba(25, 118, 210, 0.1);
+        border-left: 3px solid var(--primary-color);
       }
     }
-
-    // Dark mode styles - black background with white text
-    .dark & {
-      border-bottom-color: #333;
-      
-      .navbar-link-mobile {
-        color: $white;
-        background: #000;
-        
-        &:hover {
-          background: rgba(37, 99, 235, 0.2);
-        }
-        
-        &.active {
-          background: rgba(37, 99, 235, 0.2);
-        }
-      }
-    }
-  }
-
-  // Dark mode styles - black background
-  .dark & {
-    background: #000;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -290,10 +229,6 @@ $dark-border: #4b5563;
   
   .navbar-toggle {
     display: flex;
-  }
-  
-  .navbar-menu-mobile {
-    display: block;
   }
 }
 

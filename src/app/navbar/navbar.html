@@ -27,8 +27,8 @@
     <!-- Right Side Controls -->
     <div class="navbar-controls">
       <!-- Theme Toggle Button -->
-      <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="'Switch to ' + (themeService.currentTheme() === 'light' ? 'dark' : 'light') + ' mode'">
-        <span class="theme-icon">{{ themeService.getThemeIcon() }}</span>
+      <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="ariaLabel()">
+        <span class="theme-icon">{{ themeIcon() }}</span>
       </button>
 
       <!-- Hamburger Menu Button -->
@@ -41,21 +41,23 @@
   </div>
 
   <!-- Mobile Navigation Menu -->
-  <ul class="navbar-menu-mobile" [class.active]="isMenuOpen">
-    <li class="navbar-item-mobile">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-link-mobile" (click)="closeMenu()">Home</a>
-    </li>
-    <li class="navbar-item-mobile">
-      <a routerLink="/about" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">About</a>
-    </li>
-    <li class="navbar-item-mobile">
-      <a routerLink="/experience" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">Experience</a>
-    </li>
-    <li class="navbar-item-mobile">
-      <a routerLink="/projects" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">Projects</a>
-    </li>
-    <li class="navbar-item-mobile">
-      <a routerLink="/contact" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">Contact</a>
-    </li>
-  </ul>
+  @if (isMenuOpen) {
+    <ul class="navbar-menu-mobile">
+      <li class="navbar-item-mobile">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-link-mobile" (click)="closeMenu()">Home</a>
+      </li>
+      <li class="navbar-item-mobile">
+        <a routerLink="/about" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">About</a>
+      </li>
+      <li class="navbar-item-mobile">
+        <a routerLink="/experience" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">Experience</a>
+      </li>
+      <li class="navbar-item-mobile">
+        <a routerLink="/projects" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">Projects</a>
+      </li>
+      <li class="navbar-item-mobile">
+        <a routerLink="/contact" routerLinkActive="active" class="navbar-link-mobile" (click)="closeMenu()">Contact</a>
+      </li>
+    </ul>
+  }
 </nav> 
